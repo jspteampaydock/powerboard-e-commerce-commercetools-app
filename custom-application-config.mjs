@@ -9,18 +9,20 @@ const config = {
     cloudIdentifier: 'gcp-eu',
     env: {
         development: {
-            initialProjectKey: 'paydockecomm',
+            initialProjectKey: process.env.APP_PROJECT_KEY,
         },
         production: {
             applicationId: 'clvzerbzx0007nrxevtwbyjpm',
             url: 'https://powerboard-commercetools-custom-application.vercel.app',
         },
     },
-    clientId: 'kjQW8-nXHq4CfKVdFzEjUl6c',
-    clientSecret: 'Z1B_FP71UbE8xwcdAy_Q5FR7ztHSZZRJ',
-    projectKey: 'paydockecomm',
-    region: 'europe-west1',
-    notificationUrl: 'https://notification.powerboard-commercetools-app.jetsoftpro.dev',
+    additionalEnv:{
+        clientId: process.env.APP_CLIENT_ID,
+        clientSecret: process.env.APP_CLIENT_SECRET,
+        projectKey: process.env.APP_PROJECT_KEY,
+        region: process.env.APP_REGION,
+        notificationUrl: process.env.APP_NOTIFICATION_URL,
+    },
     oAuthScopes: {
         view: ['view_products'],
         manage: ['manage_products'],

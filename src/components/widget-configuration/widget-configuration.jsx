@@ -20,6 +20,7 @@ import ColorPicker from './color-picker';
 import PulseLoader from "react-spinners/PulseLoader";
 import CommerceToolsAPIAdapter from '../../commercetools-api-adaptor';
 import { INITIAL_SANDBOX_CONNECTION_FORM, INITIAL_WIDGET_FORM } from '../../constants';
+import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 
 
 const WidgetConfigurationForm = () => {
@@ -32,7 +33,10 @@ const WidgetConfigurationForm = () => {
     const [id, setId] = useState(null);
     const [version, setVersion] = useState(null);
     const [createdAt, setCreatedAt] = useState(null);
-    const apiAdapter = new CommerceToolsAPIAdapter();
+    const env = useApplicationContext(
+      (context) => context.environment
+    );
+    const apiAdapter = new CommerceToolsAPIAdapter(env);
 
     const version_version_options = [
         {value: 'Latest', label: 'Latest'},

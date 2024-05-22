@@ -1,13 +1,13 @@
-import config from '../custom-application-config';
 import { CHARGE_STATUSES } from './constants';
 import PowerboardApiAdaptor from './powerboard-api-adaptor';
 
 class CommerceToolsAPIAdapter {
-  constructor() {
-    this.clientId = config.clientId;
-    this.clientSecret = config.clientSecret;
-    this.projectKey = config.projectKey;
-    this.region = config.region;
+  constructor(env) {
+    this.env = env;
+    this.clientId = env.clientId;
+    this.clientSecret = env.clientSecret;
+    this.projectKey = env.projectKey;
+    this.region = env.region;
     this.accessToken = null;
     this.tokenExpirationTime = null;
     this.arrayPowerboardStatus = CHARGE_STATUSES;
@@ -100,7 +100,7 @@ class CommerceToolsAPIAdapter {
     const isLive = group === 'live';
     let secretKey = isToken ? data.credentials_access_key : data.credentials_secret_key;
     if (secretKey) {
-      const powerboardApiAdaptor = new PowerboardApiAdaptor(isLive, isToken, secretKey);
+      const powerboardApiAdaptor = new PowerboardApiAdaptor(isLive, isToken, secretKey, this.env);
       powerboardApiAdaptor.registerNotifications().catch(error => {
         console.log(error.response.data.error)
       });
