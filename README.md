@@ -59,9 +59,9 @@ The application should now be running on http://your_domain:3000.
 ## Usage
 To use the custom application:
 
-#### 1. Open your browser and navigate to http://your_domain:3000.
-#### 2. Log in with your Commercetools account credentials.
-#### 3. Follow the on-screen instructions to use the application features.
+1. Open your browser and navigate to http://your_domain:3000.
+2. Log in with your Commercetools account credentials.
+3. Follow the on-screen instructions to use the application features.
 
 
 ## License
