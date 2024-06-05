@@ -1,7 +1,7 @@
 // Make sure to import the helper functions from the `ssr` entry point.
 import { entryPointUriPathToPermissionKeys } from '@commercetools-frontend/application-shell/ssr';
 
-export const entryPointUriPath = 'powerboard_app';
+export const entryPointUriPath = 'powerboard-app';
 
 export const PERMISSIONS = entryPointUriPathToPermissionKeys(entryPointUriPath);
 
@@ -51,7 +51,7 @@ export const INITIAL_LIVE_CONNECTION_FORM = {
   alternative_payment_methods_afterpay_v1_gateway_id: '',
   alternative_payment_methods_afterpay_v1_fraud: 'Disable',
   alternative_payment_methods_afterpay_v1_fraud_service_id: '',
-  alternative_payment_methods_afterpay_v1_direct_charge: 'Disable',
+  alternative_payment_methods_afterpay_v1_direct_charge: 'Enable',
   alternative_payment_methods_zippay_use_on_checkout: '',
   alternative_payment_methods_zippay_gateway_id: '',
   alternative_payment_methods_zippay_fraud: 'Disable',
@@ -101,7 +101,7 @@ export const CHARGE_STATUSES =  {
   'powerboard-failed': 'Failed via PowerBoard',
   'powerboard-received': 'Received via PowerBoard',
 }
-export const API_LIVE_URL = 'https://api.production.powerboard.commbank.com.au';
+export const API_LIVE_URL = 'https://api.powerboard.commbank.com.au';
 export const API_SANDBOX_URL = 'https://api.preproduction.powerboard.commbank.com.au';
 
 export const NOTIFICATIONS = [

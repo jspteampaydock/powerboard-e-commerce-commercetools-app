@@ -199,11 +199,6 @@ const SandboxConnectionForm = () => {
     { value: 'Enable', label: 'Enable' },
   ];
 
-  const alternative_payment_methods_afterpay_v1_direct_charge_options = [
-    { value: 'Disable', label: 'Disable' },
-    { value: 'Enable', label: 'Enable' },
-  ];
-
   const alternative_payment_methods_zippay_use_on_checkout_options = [
     { value: 'Yes', label: 'Yes' },
     { value: 'No', label: 'No' },
@@ -1031,19 +1026,6 @@ const SandboxConnectionForm = () => {
                         errors={formik.errors.alternative_payment_methods_afterpay_v1_fraud_service_id}
                       />
                     )}
-
-                    <SelectField
-                      name="alternative_payment_methods_afterpay_v1_direct_charge"
-                      title={intl.formatMessage(messages.walletAfterpaySelectDirectChargeTitle)}
-                      description={intl.formatMessage(messages.walletAfterpaySelectDirectChargeDescription)}
-                      isMulti={false}
-                      value={formik.values.alternative_payment_methods_afterpay_v1_direct_charge}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      options={alternative_payment_methods_afterpay_v1_direct_charge_options}
-                      isSearchable={false}
-                      isClearable={false}
-                    />
 
                   </Spacings.Stack>
                 </Constraints.Horizontal>

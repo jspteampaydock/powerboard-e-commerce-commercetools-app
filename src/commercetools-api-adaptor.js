@@ -35,7 +35,7 @@ class CommerceToolsAPIAdapter {
   }
 
   async authenticate() {
-    const authUrl = `https://auth.${this.region}.gcp.commercetools.com/oauth/token`;
+    const authUrl = `https://auth.${this.region}.commercetools.com/oauth/token`;
     const authData = new URLSearchParams();
     authData.append('grant_type', 'client_credentials');
     authData.append('scope', 'manage_project:' + this.projectKey);
@@ -58,7 +58,7 @@ class CommerceToolsAPIAdapter {
 
   async makeRequest(endpoint, method = 'GET', body = null) {
     const accessToken = await this.getAccessToken();
-    const apiUrl = `https://api.${this.region}.gcp.commercetools.com/${this.projectKey}${endpoint}`;
+    const apiUrl = `https://api.${this.region}.commercetools.com/${this.projectKey}${endpoint}`;
     try {
       const response = await fetch(apiUrl, {
         headers: {
@@ -262,7 +262,7 @@ class CommerceToolsAPIAdapter {
       let objOrder = {
         id: order.id,
         order_number: order.orderNumber,
-        order_url: `https://mc.${this.region}.gcp.commercetools.com/${this.projectKey}/orders/${order.id}/payments`,
+        order_url: `https://mc.${this.region}.commercetools.com/${this.projectKey}/orders/${order.id}/payments`,
       };
 
       if (order.paymentInfo.payments) {

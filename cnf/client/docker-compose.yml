@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+
+  app-powerboard:
+    image: $IMAGE/client:${CI_COMMIT_SHA}
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 5s
+        failure_action: rollback
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 500M
+      labels:
+        - "stackname=app-powerboard"
+        - "filebeat_enable=true"
+    ports:
+      - target: 80
+        published: 8084
+        mode: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - "HOST=$TRAEFIK_URL_CLIENT"
+    labels:
+      - "filebeat_enable=true"
+    networks:
+      - proxy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1M"
+        max-file: "5"
+
+networks:
+  proxy:
+    external: true
+    name: net_proxy
+
