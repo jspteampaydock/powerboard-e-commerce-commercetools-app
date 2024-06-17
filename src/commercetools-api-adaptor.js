@@ -13,19 +13,19 @@ class CommerceToolsAPIAdapter {
     this.arrayPowerboardStatus = CHARGE_STATUSES;
   }
 
-  async setAccessToken(accessToken, tokenExpirationInSeconds) {
+    async setAccessToken(accessToken, tokenExpirationInSeconds) {
     this.accessToken = accessToken;
-    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem(this.projectKey + '_accessToken', accessToken);
     const tokenExpiration = new Date();
     tokenExpiration.setSeconds(tokenExpiration.getSeconds() + tokenExpirationInSeconds);
-    localStorage.setItem('tokenExpiration', tokenExpiration.getTime());
+    localStorage.setItem(this.projectKey + '_tokenExpiration', tokenExpiration.getTime());
   }
 
   async getAccessToken() {
-    const tokenExpiration = parseInt(localStorage.getItem('tokenExpiration'));
+    const tokenExpiration = parseInt(localStorage.getItem(this.projectKey + '_tokenExpiration'));
     const currentTimestamp = new Date().getTime();
-    if (!this.accessToken && localStorage.getItem('accessToken')) {
-      this.accessToken = localStorage.getItem('accessToken');
+    if (!this.accessToken && localStorage.getItem(this.projectKey + '_accessToken')) {
+      this.accessToken = localStorage.getItem(this.projectKey + '_accessToken');
     }
     if (!this.accessToken || currentTimestamp > tokenExpiration) {
       await this.authenticate();
@@ -33,7 +33,7 @@ class CommerceToolsAPIAdapter {
 
     return this.accessToken;
   }
-
+  
   async authenticate() {
     const authUrl = `https://auth.${this.region}.commercetools.com/oauth/token`;
     const authData = new URLSearchParams();
@@ -262,7 +262,8 @@ class CommerceToolsAPIAdapter {
       let objOrder = {
         id: order.id,
         order_number: order.orderNumber,
-        order_url: `https://mc.${this.region}.commercetools.com/${this.projectKey}/orders/${order.id}/payments`,
+        order_payment_status: order.paymentState,
+        order_url: `https://mc.${this.region}.commercetools.com/${this.projectKey}/orders/${order.id}`,
       };
 
       if (order.paymentInfo.payments) {

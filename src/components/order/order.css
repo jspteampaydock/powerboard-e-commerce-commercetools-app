@@ -10,7 +10,7 @@
 }
 
 .billing_information, .shipping_information{
-    min-width: 240px;
+    min-width: 210px;
 }
 
 .table-orders thead:hover th:not(:last-child):before {
@@ -91,6 +91,7 @@
 .table-orders .powerboard-failed span {
     background-color: rgba(241, 161, 161, 0.58);
 }
+
 .refund-base-amount{
     text-decoration:line-through;
     padding-right: 5px;
@@ -173,7 +174,7 @@
     transform: rotate(180deg);
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1920px) {
     .table-orders .date {
         width: 15%;
     }
@@ -197,7 +198,7 @@
     }
 }
 
-@media (max-width: 1499px) {
+@media (max-width: 1919px) {
     .table-orders .action-wrapper {
         display: flex;
         align-items: baseline;

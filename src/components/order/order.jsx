@@ -32,6 +32,7 @@ const OrdersHistory = () => {
     const [orderId, setOrderId] = useState(null);
     const [status, setStatus] = useState(null);
     const [statusName, setStatusName] = useState({});
+    const [orderPaymentStatus, setCTStatusName] = useState({});
     const [dateUpdated, setDateUpdated] = useState({});
     const [type, setType] = useState(null);
     const [refund, setRefund] = useState(null);
@@ -80,6 +81,10 @@ const OrdersHistory = () => {
             setChangeStatuName(prevState => ({
                 ...prevState,
                 [orderId]: statusName,
+            }));
+            setCTStatusName(prevState => ({
+                ...prevState,
+                [orderId]: orderPaymentStatus,
             }));
             setChangeDate(prevState => ({
                 ...prevState,
@@ -163,6 +168,7 @@ const OrdersHistory = () => {
         if (type === 'capture' || type === 'cancel-authorize') {
             const newStatus = type === 'capture' ? 'powerboard-paid' : 'powerboard-cancelled';
             const newStatusName = type === 'capture' ? 'Paid via PowerBoard' : 'Cancelled via PowerBoard';
+            const ctStatusName = type === 'capture' ? 'Paid' : 'Failed';
 
             setLoading(prevState => ({
                 ...prevState,
@@ -171,6 +177,7 @@ const OrdersHistory = () => {
 
             setType(type);
             setStatus(newStatus);
+            setCTStatusName(ctStatusName);
             setStatusName(newStatusName)
             setOrderId(id);
             setDateUpdated(newDates);
@@ -181,6 +188,7 @@ const OrdersHistory = () => {
         if (type === 'cancel') {
             const newStatus = 'powerboard-cancelled';
             const newStatusName = 'Cancelled via PowerBoard'
+            const ctStatusName = 'Failed'
 
             setLoading(prevState => ({
                 ...prevState,
@@ -189,6 +197,7 @@ const OrdersHistory = () => {
 
             setType(type);
             setStatus(newStatus);
+            setCTStatusName(ctStatusName)
             setStatusName(newStatusName)
             setOrderId(id);
             setDateUpdated(newDates);
@@ -228,9 +237,11 @@ const OrdersHistory = () => {
                 : undefined;
 
             const newStatusName = newStatus === 'powerboard-refunded' ? 'Refunded via PowerBoard' : 'Partial refunded via PowerBoard';
+            const ctStatusName = 'Paid'
 
             setRefund(refundAmountUpdate);
             setType(type);
+            setCTStatusName(ctStatusName)
             setStatus(newStatus);
             setStatusName(newStatusName)
             setOrderId(id);
@@ -255,6 +266,7 @@ const OrdersHistory = () => {
         { key: 'payment_source_type', label: 'Payment Source Type' },
         { key: 'created_at', label: 'Creation date' },
         { key: 'updated_at', label: 'Last updated date' },
+        { key: 'order_payment_status', label: 'Commercetools Payment Status' },
         { key: 'status', label: 'Status' },
         { key: 'action', label: 'Action' },
     ];
@@ -397,8 +409,13 @@ const OrdersHistory = () => {
                             {changeDate[d.order_number] ? moment(changeDate[d.order_number]).format('YYYY-MM-DD HH:mm:ss') : moment(d.updated_at).format('YYYY-MM-DD HH:mm:ss')}
                         </td>
                         <td
-                          className={`status ${changeStatus[d.order_number] ? changeStatus[d.order_number]: d.status}`}>
+                            className={`status ${changeStatus[d.order_number] ? changeStatus[d.order_number]: d.status}`}>
                             <span className="mobile-label">{columns[9].label}:</span>
+                            <span>{orderPaymentStatus[d.order_number] ? orderPaymentStatus[d.order_number] : d.order_payment_status}</span>
+                        </td>
+                        <td
+                          className={`status ${changeStatus[d.order_number] ? changeStatus[d.order_number]: d.status}`}>
+                            <span className="mobile-label">{columns[10].label}:</span>
                             <span>{changeStatusName[d.order_number] ? changeStatusName[d.order_number] : d.statusName}</span>
                         </td>
                         <td className="action">

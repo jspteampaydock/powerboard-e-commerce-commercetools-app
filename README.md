@@ -20,13 +20,13 @@ Follow these steps to install the custom application:
 Open your terminal and run the following command to clone the repository:
 
 ```
-git clone https://github.com/PayDock/e-commerce-powerboard-commercetools-app
+git clone https://github.com/CommBank-PowerBoard/powerboard-e-commerce-commercetools-app
 ```
 
 Navigate to the project directory:
 
 ```
-cd e-commerce-powerboard-commercetools-app
+cd powerboard-e-commerce-commercetools-app
 ```
 
 ### 2 . Install dependencies
